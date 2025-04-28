@@ -70,3 +70,6 @@ Generative AI was utilized in three key areas to speed up development and improv
 - error handling - currently there is none
 - extend testing
 
+## Site
+https://receipe-vault.netlify.app/
+
