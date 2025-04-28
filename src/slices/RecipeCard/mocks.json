@@ -1,0 +1,55 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"main_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+					"width": 8640,
+					"height": 8640
+				},
+				"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+				"width": 8640,
+				"height": 8640,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "farther",
+				"credits": null,
+				"__TYPE__": "ImageContent"
+			},
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "level",
+				"type": "Text"
+			},
+			"rating_value": {
+				"__TYPE__": "FieldContent",
+				"value": "47",
+				"type": "Number"
+			},
+			"rating_count": {
+				"__TYPE__": "FieldContent",
+				"value": "69",
+				"type": "Number"
+			},
+			"is_favorited": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"cuisine": {
+				"__TYPE__": "FieldContent",
+				"value": "Asian",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

@@ -4,6 +4,71 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type AllRecipesDocumentDataSlicesSlice = RecipeGridSlice | RecipeCardSlice;
+
+/**
+ * Content for All Recipes documents
+ */
+interface AllRecipesDocumentData {
+  /**
+   * Slice Zone field in *All Recipes*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: all_recipes.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<AllRecipesDocumentDataSlicesSlice> /**
+   * Meta Title field in *All Recipes*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: all_recipes.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *All Recipes*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: all_recipes.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *All Recipes*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: all_recipes.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * All Recipes document from Prismic
+ *
+ * - **API ID**: `all_recipes`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AllRecipesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AllRecipesDocumentData>,
+    "all_recipes",
+    Lang
+  >;
+
 type HomepageDocumentDataSlicesSlice = HeroSlice;
 
 /**
@@ -69,6 +134,40 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
+type RecipeOverviewDocumentDataSlicesSlice = RecipeCardSlice;
+
+/**
+ * Content for Recipe overview documents
+ */
+interface RecipeOverviewDocumentData {
+  /**
+   * Slice Zone field in *Recipe overview*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_overview.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<RecipeOverviewDocumentDataSlicesSlice>;
+}
+
+/**
+ * Recipe overview document from Prismic
+ *
+ * - **API ID**: `recipe_overview`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type RecipeOverviewDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<RecipeOverviewDocumentData>,
+    "recipe_overview",
+    Lang
+  >;
+
 /**
  * Item in *Settings → Navigation*
  */
@@ -127,7 +226,11 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument | SettingsDocument;
+export type AllDocumentTypes =
+  | AllRecipesDocument
+  | HomepageDocument
+  | RecipeOverviewDocument
+  | SettingsDocument;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -191,6 +294,173 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Primary content in *RecipeCard → Default → Primary*
+ */
+export interface RecipeCardSliceDefaultPrimary {
+  /**
+   * Main Image field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.main_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  main_image: prismic.ImageField<never>;
+
+  /**
+   * Recipe Title field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Rating Value field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.rating_value
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  rating_value: prismic.NumberField;
+
+  /**
+   * Number of Ratings field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.rating_count
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  rating_count: prismic.NumberField;
+
+  /**
+   * Is Favorited field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.is_favorited
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  is_favorited: prismic.BooleanField;
+
+  /**
+   * Cuisine field in *RecipeCard → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_card.default.primary.cuisine
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  cuisine: prismic.SelectField<"Asian" | "Italian" | "Mexican">;
+}
+
+/**
+ * Default variation for RecipeCard Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Standard recipe card displaying all elements.
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RecipeCardSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RecipeCardSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *RecipeCard*
+ */
+type RecipeCardSliceVariation = RecipeCardSliceDefault;
+
+/**
+ * RecipeCard Shared Slice
+ *
+ * - **API ID**: `recipe_card`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RecipeCardSlice = prismic.SharedSlice<
+  "recipe_card",
+  RecipeCardSliceVariation
+>;
+
+/**
+ * Item in *RecipeGrid → Default → Primary → Recipes*
+ */
+export interface RecipeGridSliceDefaultPrimaryRecipesItem {
+  /**
+   * Recipe field in *RecipeGrid → Default → Primary → Recipes*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_grid.default.primary.recipes[].recipe
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  recipe: prismic.ContentRelationshipField<"recipe_overview">;
+}
+
+/**
+ * Primary content in *RecipeGrid → Default → Primary*
+ */
+export interface RecipeGridSliceDefaultPrimary {
+  /**
+   * Heading field in *RecipeGrid → Default → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_grid.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Recipes field in *RecipeGrid → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: recipe_grid.default.primary.recipes[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  recipes: prismic.GroupField<
+    Simplify<RecipeGridSliceDefaultPrimaryRecipesItem>
+  >;
+}
+
+/**
+ * Default variation for RecipeGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RecipeGridSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RecipeGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *RecipeGrid*
+ */
+type RecipeGridSliceVariation = RecipeGridSliceDefault;
+
+/**
+ * RecipeGrid Shared Slice
+ *
+ * - **API ID**: `recipe_grid`
+ * - **Description**: RecipeGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RecipeGridSlice = prismic.SharedSlice<
+  "recipe_grid",
+  RecipeGridSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -212,9 +482,15 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AllRecipesDocument,
+      AllRecipesDocumentData,
+      AllRecipesDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      RecipeOverviewDocument,
+      RecipeOverviewDocumentData,
+      RecipeOverviewDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
@@ -223,6 +499,15 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      RecipeCardSlice,
+      RecipeCardSliceDefaultPrimary,
+      RecipeCardSliceVariation,
+      RecipeCardSliceDefault,
+      RecipeGridSlice,
+      RecipeGridSliceDefaultPrimaryRecipesItem,
+      RecipeGridSliceDefaultPrimary,
+      RecipeGridSliceVariation,
+      RecipeGridSliceDefault,
     };
   }
 }

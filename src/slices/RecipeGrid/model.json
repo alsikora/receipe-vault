@@ -1,0 +1,48 @@
+{
+  "id": "recipe_grid",
+  "type": "SharedSlice",
+  "name": "RecipeGrid",
+  "description": "RecipeGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "recipes": {
+          "type": "Group",
+          "config": {
+            "label": "Recipes",
+            "repeat": true,
+            "fields": {
+              "recipe": {
+                "type": "Link",
+                "config": {
+                  "label": "Recipe",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "recipe_overview"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

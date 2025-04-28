@@ -16,21 +16,52 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run teste:
+```bash
+npm run test
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+# Project Proposal: Personal Recipe Collection
 
-To learn more about Next.js, take a look at the following resources:
+## Overview
+This project implements a structured content model using Prismic.io with two key pages (Homepage and All Recipes) and three custom slices (Hero, RecipeGrid, and RecipeCard). The content structure follows a modular approach where RecipeGrid uses RecipeCard as a child component.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Custom Types
+### 1. Homepage
+The Homepage custom type serves as the main landing page for the Recipe Vault application.
+### 2. All Recipes
+The All Recipes custom type serves as a comprehensive listing page for browsing the complete recipe collection.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Component Relationships
+### Nesting Structure
+1. **Homepage / All Recipes** (Custom Types)
+    - Contains → **Slice Zone**
+        - Contains → **Hero** (on Homepage)
+        - Contains → **RecipeGrid**
+            - Contains → Multiple **RecipeCard** instances
+### Data Flow
+- **RecipeGrid** queries the Prismic API for recipe data based on configured parameters
+- Each recipe is rendered as a **RecipeCard** within the grid
+- **RecipeCard** receives data as props from the parent RecipeGrid
 
-## Deploy on Vercel
+### Implementation Benefits
+1. **Modular Design**: Each component serves a specific purpose and can be reused across different contexts
+2. **Consistent Presentation**: RecipeCard ensures consistent styling and information display for recipes
+3. **Flexible Layouts**: Content editors can adjust the layout and content without developer intervention
+4. **Performance Optimization**: Grid can implement pagination or lazy loading for efficient rendering
+5. **Maintainability**: Changes to RecipeCard automatically propagate to all instances throughout the site
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Use of Generative AI in the Project
+Generative AI was utilized in three key areas to speed up development and improve quality:
+## 1. **Content Generation**
+- **Text**: Generated recipe descriptions, instructions, ingredient lists, category definitions, and SEO-friendly content.
+- **Images**: Created recipe images, category thumbnails, and decorative UI visuals where real assets were unavailable.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 2. **CSS/Tailwind Styling**
+- Styled components like `Hero`, `RecipeGrid`, and `RecipeCard` using AI-suggested Tailwind classes.
+- Optimized responsive layouts, animations, and overall visual consistency.
+- Consolidated redundant class usage for cleaner, maintainable styles.
+
+## 3. **Unit Testing**
+

@@ -4,4 +4,6 @@ import dynamic from "next/dynamic";
 
 export const components = {
   hero: dynamic(() => import("./Hero")),
+  recipe_card: dynamic(() => import("./RecipeCard")),
+  recipe_grid: dynamic(() => import("./RecipeGrid")),
 };
