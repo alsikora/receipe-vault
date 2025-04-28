@@ -52,16 +52,21 @@ The All Recipes custom type serves as a comprehensive listing page for browsing 
 4. **Performance Optimization**: Grid can implement pagination or lazy loading for efficient rendering
 5. **Maintainability**: Changes to RecipeCard automatically propagate to all instances throughout the site
 
-# Use of Generative AI in the Project
+## Use of Generative AI in the Project
 Generative AI was utilized in three key areas to speed up development and improve quality:
-## 1. **Content Generation**
+### 1. **Content Generation**
 - **Text**: Generated recipe descriptions, instructions, ingredient lists, category definitions, and SEO-friendly content.
 - **Images**: Created recipe images, category thumbnails, and decorative UI visuals where real assets were unavailable.
 
-## 2. **CSS/Tailwind Styling**
+### 2. **CSS/Tailwind Styling**
 - Styled components like `Hero`, `RecipeGrid`, and `RecipeCard` using AI-suggested Tailwind classes.
 - Optimized responsive layouts, animations, and overall visual consistency.
 - Consolidated redundant class usage for cleaner, maintainable styles.
 
-## 3. **Unit Testing**
+### 3. **Unit Testing**
+
+## Future improvements
+- image optimization
+- error handling - currently there is none
+- extend testing
 
