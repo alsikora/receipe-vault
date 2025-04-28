@@ -6,23 +6,29 @@ import '@testing-library/jest-dom';
 
 // Mock the next/link component
 jest.mock('next/link', () => {
-  return ({children, href}: { children: React.ReactNode; href: string }) => {
+  const NextLink = ({children, href}: { children: React.ReactNode; href: string }) => {
     return (
       <a href={href} data-testid="mock-link">
         {children}
       </a>
     );
   };
+  NextLink.displayName = 'NextLink';
+  return NextLink;
 });
 
 // Mock the Logo component
 jest.mock('../Logo/Logo', () => ({
-  Logo: (props: any) => <div data-testid="mock-logo" {...props} />
+  Logo: (props: React.ComponentProps<'div'>) => <div data-testid="mock-logo" {...props} />
 }));
 
 // Mock the PrismicNextLink component
 jest.mock('@prismicio/next', () => ({
-  PrismicNextLink: ({field, children, className}: any) => (
+  PrismicNextLink: ({field, children, className}: {
+    field?: {url?: string; text?: string};
+    children?: React.ReactNode;
+    className?: string;
+  }) => (
     <a href={field?.url || '#'} className={className} data-testid="prismic-link">
       {children || field?.text || 'Link Text'}
     </a>

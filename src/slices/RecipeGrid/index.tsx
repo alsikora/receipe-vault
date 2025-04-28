@@ -40,8 +40,8 @@ const RecipeGrid: FC<RecipeGridProps> = ({slice}: RecipeGridProps) => {
 
         {/* Recipe Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {recipes.map((item) => (
-            <Recipe id={item.recipe.id} key={item.recipe.id}/>
+          {recipes.map((item, index) => (
+            <Recipe recipe={item.recipe} key={index}/>
           ))}
         </div>
       </div>
